@@ -9,7 +9,11 @@ function native(configuration, callback) {
   this.value = 0;
   this.filePath = GPIO_FILE_PATH.replace('#PIN#', this.pin);
 
-  this.write(this.value, callback); // create the file
+  if (callback) {
+    this.write(this.value, callback); // create the file
+  } else {
+    this.writeSync(this.value);
+  }
 
   if (this.direction === native.DIRECTION.OUT) {
     console.log('GPIO MOCK: opening pin ' + this.pin +
@@ -84,6 +88,10 @@ native.prototype = {
   closeSync: function() {
     fs.unlinkSync(this.filePath);
     this.value = -1;
+  },
+
+  setDirectionSync: function() {
+    // NOT IMPLEMENTED
   },
 };
 

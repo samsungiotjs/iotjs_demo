@@ -14,7 +14,7 @@ function requestSyncSensors() {
     // sync sensors
     sensors.fetch(function(errors, results) {
       // print if errors exist
-      if (errors.length) {
+      if (errors && errors.length) {
         errors.forEach(function(item) {
           console.error('fetch error', item.name);
         });
